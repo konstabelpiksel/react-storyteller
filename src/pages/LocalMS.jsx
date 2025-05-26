@@ -13,6 +13,12 @@ export default function LocalMS() {
         <>
         <h1>LocalMS Page</h1>
         <button onClick={gotosplash}>Home</button>
+
+
         </>
     )
 }
+
+/*
+
+*/

@@ -5,6 +5,7 @@ import { Routes, Route, useLocation } from 'react-router';
 // Pages
 import Splash from '../pages/Splash';
 import LocalMS from '../pages/LocalMS';
+import Playground from '../pages/Playground';
 
 //https://github.com/Hank-D-Tank/react-page-transitions/blob/main/src/components/Navigation.jsx
 
@@ -18,10 +19,10 @@ const PAGES = {
         color: '#0066ff',
         component: LocalMS
     },
-    // '/vrbox': {
-    //     color: '#0066ff',
-    //     component: VrBox
-    // },
+    '/playground': {
+        color: '#0066ff',
+        component: Playground
+    },
     // '/dashboardweb': {
     //     color: '#00cc66',
     //     component: DashboardWeb

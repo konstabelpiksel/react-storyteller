@@ -5,14 +5,15 @@ export default function Splash() {
 
     const navigate = useNavigate();
 
-    function gotolocalms(){
-        navigate('/localms')
+    function goToURL(loc){
+        navigate(loc)
     }
-
+    
     return (
         <>
         <h1>Splash Page</h1>
-        <button onClick={gotolocalms}>LocalMS</button>
+        <button onClick={()=>goToURL('/playground')}>Playground</button>
+        <button onClick={()=>goToURL('/localms')}>LocalMS</button>
         </>
     )
 }

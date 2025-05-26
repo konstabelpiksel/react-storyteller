@@ -1,0 +1,92 @@
+[
+  {
+    "tropeName": "The Hero's Journey",
+    "tropeDesc": "A narrative structure where a protagonist embarks on an adventure, faces challenges, and returns transformed.",
+    "example": "Luke Skywalker's transformation in 'Star Wars: A New Hope' (1977)."
+  },
+  {
+    "tropeName": "The Final Girl",
+    "tropeDesc": "In horror films, the last woman alive who confronts the killer and survives to tell the story.",
+    "example": "Laurie Strode in 'Halloween' (1978)."
+  },
+  {
+    "tropeName": "The MacGuffin",
+    "tropeDesc": "An object or goal that drives the plot but may have little intrinsic importance.",
+    "example": "The briefcase in 'Pulp Fiction' (1994)."
+  },
+  {
+    "tropeName": "Deus Ex Machina",
+    "tropeDesc": "An unexpected power or event that saves a seemingly hopeless situation.",
+    "example": "The eagles rescuing Frodo and Sam in 'The Lord of the Rings: The Return of the King' (2003)."
+  },
+  {
+    "tropeName": "The Chosen One",
+    "tropeDesc": "A character destined to save the world or accomplish a great task.",
+    "example": "Neo in 'The Matrix' (1999)."
+  },
+  {
+    "tropeName": "The Love Triangle",
+    "tropeDesc": "A romantic relationship involving three people, leading to tension and conflict.",
+    "example": "Katniss, Peeta, and Gale in 'The Hunger Games' series."
+  },
+  {
+    "tropeName": "The Mentor",
+    "tropeDesc": "An experienced advisor who guides the protagonist.",
+    "example": "Mr. Miyagi in 'The Karate Kid' (1984)."
+  },
+  {
+    "tropeName": "The Evil Twin",
+    "tropeDesc": "A character's identical counterpart with opposing morals.",
+    "example": "Dr. Jekyll and Mr. Hyde in 'Dr. Jekyll and Mr. Hyde' (1931)."
+  },
+  {
+    "tropeName": "The White Savior",
+    "tropeDesc": "A white character who rescues people of color from their plight.",
+    "example": "John Smith in 'The Last Samurai' (2003)."
+  },
+  {
+    "tropeName": "The Manic Pixie Dream Girl",
+    "tropeDesc": "A quirky, whimsical female character who helps the male protagonist achieve happiness.",
+    "example": "Sam in 'Garden State' (2004)."
+  },
+  {
+    "tropeName": "The Red Herring",
+    "tropeDesc": "A misleading clue or character meant to divert attention from the true plot or culprit.",
+    "example": "Roger 'Verbal' Kint in 'The Usual Suspects' (1995)."
+  },
+  {
+    "tropeName": "The Walking Away from an Explosion",
+    "tropeDesc": "A character walks away from an explosion without flinching, emphasizing their cool demeanor.",
+    "example": "James Bond in 'Casino Royale' (2006)."
+  },
+  {
+    "tropeName": "The Wilhelm Scream",
+    "tropeDesc": "A distinct sound effect scream used repeatedly across numerous films and TV shows.",
+    "example": "Heard prominently in 'Star Wars' films and 'Indiana Jones' series."
+  },
+  {
+    "tropeName": "Plot Armor",
+    "tropeDesc": "Main characters survive situations they realistically shouldn't, simply because they're important to the story.",
+    "example": "James Bond surviving countless dangerous encounters in every Bond film."
+  },
+  {
+    "tropeName": "Meet Cute",
+    "tropeDesc": "A charming, humorous, or unusual first encounter between two characters destined for romance.",
+    "example": "Anna Scott and William Thacker bumping into each other in 'Notting Hill' (1999)."
+  },
+  {
+    "tropeName": "Training Montage",
+    "tropeDesc": "A sequence showing a character rapidly developing skills through quick cuts set to motivational music.",
+    "example": "Rocky's training sequences in the 'Rocky' series."
+  },
+  {
+    "tropeName": "Secret Identity",
+    "tropeDesc": "A character leads a double life, concealing their true identity from others.",
+    "example": "Peter Parker as Spider-Man in the Marvel films."
+  },
+  {
+    "tropeName": "Breaking the Fourth Wall",
+    "tropeDesc": "Characters acknowledge the audience directly, disrupting the fictional narrative.",
+    "example": "Deadpool talking directly to viewers in 'Deadpool' (2016)."
+  }
+]
