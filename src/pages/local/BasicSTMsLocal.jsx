@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router'
-import styles from './LocalMS.module.css'
+import styles from './BasicSTMsLocal.module.css'
 
-export default function LocalMS() {
+export default function BasicSTMsLocal() {
 
     const navigate = useNavigate();
 

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import styles from './Playground.module.css'
+import styles from './BasicOpenAI.module.css'
 
-export default function Playground() {
+import NavBar from '../../components/NavBar'
+
+export default function BasicOpenAI() {
 
     const navigate = useNavigate();
 
@@ -80,11 +82,18 @@ export default function Playground() {
     };
 
     return (
-        <div>
-            <h1>Playground</h1>
-            <button onClick={() => goToURL('/')}>Home</button>
+        <>
+        <NavBar />
+        <div className={styles.content}>
+            <h1>Playground (OpenAPI)</h1>
 
-            <div>
+            <div className={styles.card}>
+                <p>Enter your openai api key and press Save button</p>
+                <label htmlFor='chatgptapikey'>Api Key</label>
+                <input className={styles.textinput} type='password' id='chatgptapikey' />
+            </div>
+
+            <div className={styles.chatbox}>
                 {messages.map((message, index) => (
                     <div key={index}>
                         <h4>{message.role}</h4>
@@ -110,6 +119,7 @@ export default function Playground() {
             </form>
 
         </div>
+        </>
     )
 }
 

@@ -1,19 +1,17 @@
-import { useNavigate } from 'react-router'
 import styles from './Splash.module.css'
+import NavBar from '../components/NavBar';
 
 export default function Splash() {
 
-    const navigate = useNavigate();
-
-    function goToURL(loc){
-        navigate(loc)
-    }
-    
     return (
         <>
-        <h1>Splash Page</h1>
-        <button onClick={()=>goToURL('/playground')}>Playground</button>
-        <button onClick={()=>goToURL('/localms')}>LocalMS</button>
+            <NavBar />
+            <h1>Dev Logs</h1>
+            <ol>
+                <li>OpenAI Playground - with chatgpt api</li>
+                <li>Styling navbar</li>
+                
+            </ol>
         </>
     )
 }

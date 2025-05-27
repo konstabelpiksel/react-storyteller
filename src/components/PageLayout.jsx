@@ -4,8 +4,9 @@ import { Routes, Route, useLocation } from 'react-router';
 
 // Pages
 import Splash from '../pages/Splash';
-import LocalMS from '../pages/LocalMS';
-import Playground from '../pages/Playground';
+import BasicSTMsLocal from '../pages/local/BasicSTMsLocal';
+import BasicOpenAI from '../pages/playground/BasicOpenAI';
+import BasicSTEnOnline from '../pages/online/BasicSTEnOnline';
 
 //https://github.com/Hank-D-Tank/react-page-transitions/blob/main/src/components/Navigation.jsx
 
@@ -15,13 +16,17 @@ const PAGES = {
         color: '#ff0000',
         component: Splash
     },
-    '/localms': {
+    '/local': {
         color: '#0066ff',
-        component: LocalMS
+        component: BasicSTMsLocal
+    },
+    '/online': {
+        color: '#0066ff',
+        component: BasicSTEnOnline
     },
     '/playground': {
         color: '#0066ff',
-        component: Playground
+        component: BasicOpenAI
     },
     // '/dashboardweb': {
     //     color: '#00cc66',
