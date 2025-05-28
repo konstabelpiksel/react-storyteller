@@ -10,61 +10,78 @@ export default function BasicSTEnOnline() {
 
     const API_KEY = process.env.REACT_APP_OPEN_API_KEY;
 
-    const [isTyping, setIsTyping] = useState(false);
-
-    const [storyPhase, setStoryPhase] = useState('start')
+    const [storyPhase, setStoryPhase] = useState(1);
 
     const [storyLanguage, setStoryLanguage] = useState('English');
-    const [storyMainCharacter, setStoryMainCharacter] = useState(null);
-    const [storySecondCharacter, setStorySecondCharacter] = useState(null)
-    const [storyLocation, setStoryLocation] = useState(null)
-    const [storyKeyAction, setStoryKeyAction] = useState(null)
-    const [storyStyle, setStoryStyle] = useState(null)
-    const [storyLength, setStoryLength] = useState(null)
 
-    const [messages, setMessages] = useState([
-        {
-            role: "system",
-            content: "You are a helpful assistant, helping users with their questions."
-        }
-    ])
-
-    let first_phase = {
-        role: "user",
-        content:
-            `"Write a story outline in ${storyLanguage} with these elements:
-                    - ${storyMainCharacter}
-                    - ${storySecondCharacter}
-                    - set in ${storyLocation}
-                    - focused on ${storyKeyAction}
-                    - style ${storyStyle}
-                    - length ${storyLength}
-                "`,
-    }
-
+    const [messages, setMessages] = useState(null);
 
     function postStoryElements(e) {
         e.preventDefault();
-        const input = e.target.input.value;
+        const mainChar = e.target.mainchar.value;
+        const secChar = e.target.secchar.value;
+        const location = e.target.stloc.value;
+        const keyAction = e.target.stka.value;
+        const style = e.target.ststy.value;
+        const length = e.target.stlen.value;
 
+        let input = "";
 
+        if (storyPhase == 1) {
+            input = [
+                {
+                    role: "system",
+                    content: "You are a helpful assistant, helping users with their questions."
+                },
+                {
+                    role: "user",
+                    content: `"Write a story outline in ${storyLanguage} with these elements:
+            - ${mainChar}
+            - ${secChar}
+            - set in ${location}
+            - focused on ${keyAction}
+            - style ${style}
+            - length ${length} words
+            IMPORTANT: Answer ONLY with your story outline. Do NOT repeat these instructions or use bullet points."`,
+                }
+            ];
+        }
 
-        if (input.trim() !== "") {
+        if (storyPhase == 2) {
+            input = {
+                role: "user",
+                content: `"Here's a story outline: ${messages} Write a story based on the outline in a detailed and engaging way, considering:
+                - Maintain the ${storyStyle} style
+                - Include sensory details and emotions where applicable
+                - Use natural dialogue
+                - Approximate length (VERY IMPORTANT): ${storyLength} words
+                IMPORTANT: Respond ONLY with the final story. DO NOT repeat these instructions or the original outline."`.trim(),
+            }
+        }
+
+        if (storyPhase == 3) {
+            input = {
+                role: "user",
+                content: `"Here's a story that needs revision: ${messages} Improve this story while maintaining these key points:
+                - Style ${storyStyle}
+                - Correct grammar and spelling errors
+                - Improve dialogue and descriptions
+                - Keep the length similar!! VERY IMPORTANT!! ${storyLength} words
+                IMPORTANT: Respond ONLY with the final improved version. DO NOT repeat these instructions or the original story."`.trim(),
+            }
+        }
+
+        if (input.length > 0) {
+            console.log(input)
             handleSendMessage(input);
-            //console.log(input)
             e.target.reset();
         }
     }
 
-
-
     const handleSendMessage = (messageContent) => {
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { role: "user", content: messageContent },
-        ]);
+        setMessages();
         chatData(messageContent);
-        setIsTyping(true);
+        //setIsTyping(true);
     };
 
     const chatData = async (userMessage) => {
@@ -81,7 +98,7 @@ export default function BasicSTEnOnline() {
                     body: JSON.stringify({
                         model: "gpt-3.5-turbo",
                         /* gpt-4.1-mini | gpt-4.1 | gpt-4.1-nano */
-                        messages: [...messages, { role: "user", content: userMessage }],
+                        messages: userMessage,
                         //temperature: 0.7,
                     }),
                 }
@@ -92,17 +109,11 @@ export default function BasicSTEnOnline() {
             }
 
             const responseData = await response.json();
-            setIsTyping(false);
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                {
-                    role: "assistant",
-                    content: responseData.choices[0].message.content,
-                },
-            ]);
-        } catch (error) {
+            setMessages(responseData.choices[0].message.content);
+            setStoryPhase(storyPhase => storyPhase + 1)
+        }
+        catch (error) {
             console.error("Error while fetching chat data:", error);
-            setIsTyping(false);
         }
     };
 
@@ -111,38 +122,49 @@ export default function BasicSTEnOnline() {
             <NavBar />
             <div className={styles.content}>
                 <h1>Story Teller (OpenAPI)</h1>
+                <p>{storyPhase}</p>
 
-                {/* <div className={styles.card}>
-                <p>Enter your openai api key and press Save button</p>
-                <label htmlFor='chatgptapikey'>Api Key</label>
-                <input className={styles.textinput} type='password' id='chatgptapikey' />
-            </div> */}
+                {messages && (<div className={styles.chatbox}>
+                    <div>
+                        <p>{messages}</p>
+                    </div>
 
-                <div className={styles.chatbox}>
-                    {messages.map((message, index) => (
-                        <div key={index}>
-                            <h4>{message.role}</h4>
-                            <p>{message.content}</p>
+                    {storyPhase == 2 && <button className={styles.submitbutton} onClick={postStoryElements}>Proceeed to 2</button>}
+                    {storyPhase == 3 && <button className={styles.submitbutton} onClick={postStoryElements}>Finalize</button>}
+                </div>)}
+
+                <form onSubmit={postStoryElements} aria-label='Story Elements Form'>
+                    <div className={styles.card}>
+                        <p className={styles.instruction}>Enter the following information and press the Start button</p>
+                        <div className={styles.formrow}>
+                            <label htmlFor='mainchar'>Main Character</label>
+                            <input required className={styles.inputfield} type='text' id='mainchar' placeholder='Tom, a tom cat' />
                         </div>
-                    ))}
-                    {isTyping && <p>StoryTeller is working...</p>}
-                </div>
-
-                <div className={styles.card}>
-                    <p>Enter the following information and press the Start button</p>
-                    <label htmlFor='mainchar'>Main Character</label>
-                    <input className={styles.inputfield} type='text' id='mainchar' placeholder='Main Character' />
-                    <label htmlFor='secchar'>Second Character</label>
-                    <input className={styles.inputfield} type='text' id='secchar' placeholder='Main Character' />
-
-                </div>
-
-                <form onSubmit={postStoryElements} aria-label='Chat Input Form'>
-                    <div className={styles.inputbox}>
-                        <input />
-                        <button type='submit' className={styles.chatsendbutton}>
-                            Send
-                        </button>
+                        <div className={styles.formrow}>
+                            <label htmlFor='secchar'>Second Character</label>
+                            <input required className={styles.inputfield} type='text' id='secchar' placeholder='Jerry, a mouse' />
+                        </div>
+                        <div className={styles.formrow}>
+                            <label htmlFor='stloc'>Story Location</label>
+                            <input required className={styles.inputfield} type='text' id='stloc' placeholder='Granny house' />
+                        </div>
+                        <div className={styles.formrow}>
+                            <label htmlFor='stka'>Key Action</label>
+                            <input required className={styles.inputfield} type='text' id='stka' placeholder='A hunter chasing its prey' />
+                        </div>
+                        <div className={styles.formrow}>
+                            <label htmlFor='ststy'>Story style</label>
+                            <input required className={styles.inputfield} type='text' id='ststy' placeholder='Comedy, cartoony' />
+                        </div>
+                        <div className={styles.formrow}>
+                            <label htmlFor='stlen'>Story Length</label>
+                            <select required className={styles.inputfield} id='stlen'>
+                                <option value={250}>Short story (250 wds)</option>
+                                <option value={500}>Medium length story (500 wds)</option>
+                                <option value={1000}>Short novel (1000 wds)</option>
+                            </select>
+                        </div>
+                        <button type="submit">Submit</button>
                     </div>
                 </form>
 

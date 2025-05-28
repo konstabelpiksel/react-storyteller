@@ -16,15 +16,23 @@ const PAGES = {
         color: '#ff0000',
         component: Splash
     },
-    '/local': {
+    '/local/basicstmslocal': {
         color: '#0066ff',
         component: BasicSTMsLocal
     },
-    '/online': {
+    // '/local/basicstenlocal': {
+    //     color: '#0066ff',
+    //     component: BasicSTEnLocal
+    // },
+    // '/online/basicstmsonline': {
+    //     color: '#0066ff',
+    //     component: BasicSTMsOnline
+    // },
+    '/online/basicstenonline': {
         color: '#0066ff',
         component: BasicSTEnOnline
     },
-    '/playground': {
+    '/playground/basicopenai': {
         color: '#0066ff',
         component: BasicOpenAI
     },
