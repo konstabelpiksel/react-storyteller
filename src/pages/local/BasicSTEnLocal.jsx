@@ -1,22 +1,19 @@
 import { useState } from 'react'
 //import { useNavigate } from 'react-router'
-import styles from './BasicSTEnOnline.module.css'
+import styles from './BasicSTEnLocal.module.css'
 
 import NavBar from '../../components/NavBar'
 
-export default function BasicSTEnOnline() {
-
-    //const navigate = useNavigate();
-
-    //const API_KEY = process.env.REACT_APP_OPEN_API_KEY;
+export default function BasicSTEnLocal() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [storyPhase, setStoryPhase] = useState(1);
     const [storyLanguage, setStoryLanguage] = useState();
     const [story, setStory] = useState('This is where the story will be shown');
-    const [ststyle, setStyle] = useState()
-    const [stlength, setStlength] = useState()
-    const [appapikey, setAppapikey] = useState()
+    const [ststyle, setStyle] = useState();
+    const [stlength, setStlength] = useState();
+    const [modelname, setModelname] = useState();
+    const [localurl, setLocalurl] = useState();
 
     function postStoryElements(e) {
         e.preventDefault();
@@ -24,7 +21,7 @@ export default function BasicSTEnOnline() {
         let input = "";
 
         if (storyPhase == 1) {
-            const apik = e.target.apikey.value;
+            const apiep = e.target.apiurl.value;
             const lang = e.target.stlang.value;
             const mainChar = e.target.mainchar.value;
             const secChar = e.target.secchar.value;
@@ -32,11 +29,13 @@ export default function BasicSTEnOnline() {
             const keyAction = e.target.stka.value;
             const style = e.target.ststy.value;
             const length = e.target.stlen.value;
+            const mdname = e.target.mdlname.value;
 
             setStoryLanguage(lang)
             setStlength(length)
             setStyle(style)
-            setAppapikey(apik)
+            setLocalurl(apiep)
+            setModelname(mdname)
 
             input = [
                 {
@@ -85,26 +84,25 @@ export default function BasicSTEnOnline() {
             }]
             handleSendMessage(input, appapikey);
         }
-    }
+    };
 
     const handleSendMessage = (messageContent, apik) => {
         chatData(messageContent, apik);
     };
 
-    const chatData = async (userMessage, apik) => {
+    const chatData = async (userMessage, localurl) => {
         setIsLoading(true)
         try {
             const response = await fetch(
-                "https://api.openai.com/v1/chat/completions",
+                localurl,
                 {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apik}`
                     },
                     body: JSON.stringify({
-                        model: "gpt-3.5-turbo",
+                        model: modelname,
                         /* gpt-4.1-mini | gpt-4.1 | gpt-4.1-nano */
                         messages: userMessage,
                         //temperature: 0.7,
@@ -128,16 +126,17 @@ export default function BasicSTEnOnline() {
         }
     };
 
+
     return (
         <>
             <NavBar />
             <div className={styles.content}>
-                <h1>Online Story Teller (OpenAPI)</h1>
+                <h1>LMStudio Story Teller</h1>
 
                 {isLoading && (
                     <div className={styles.spinnerContainer}>
                         <div className={styles.spinner}></div>
-                        <p>Generating story...</p>
+                        <p>Processing...</p>
                     </div>
                 )}
 
@@ -154,10 +153,17 @@ export default function BasicSTEnOnline() {
                         <form onSubmit={postStoryElements} aria-label='Story Elements Form'>
                             <div className={styles.card}>
                                 <p className={styles.instruction}>Enter the following information and press the Start button</p>
+                                
                                 <div className={styles.formrow}>
-                                    <label htmlFor='apikey'>OpenAI Api Key</label>
-                                    <input required className={styles.inputfield} type='password' id='apikey' placeholder='Your api key' />
+                                    <label htmlFor='apiurl'>Local API URL</label>
+                                    <input required className={styles.inputfield} type='text' id='apiurl' placeholder='Your api url, e.g http://localhost:1234/v1/chat/completions' />
                                 </div>
+
+                                <div className={styles.formrow}>
+                                    <label htmlFor='modelname'>Model Name</label>
+                                    <input required className={styles.inputfield} type='text' id='modelname' placeholder='Local model name' />
+                                </div>
+
                                 <div className={styles.formrow}>
                                     <label htmlFor='stlang'>Story Language</label>
                                     <select required className={styles.inputfield} id='stlang'>
@@ -198,19 +204,13 @@ export default function BasicSTEnOnline() {
                             </div>
                         </form>
                     </>
-                )}
 
+                )}
             </div>
         </>
     )
 }
 
 /*
-https://medium.com/@deeksharungta/how-to-build-your-own-ai-chatbot-with-open-ai-api-cb779b03bae2
 
-process is not defined error
-https://dev.to/boostup/uncaught-referenceerror-process-is-not-defined-12kg
-
-flexbox form
-https://codepen.io/rstrahl/pen/rxmjgL
 */

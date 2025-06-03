@@ -29,6 +29,9 @@ export default function NavBar() {
                     <li className={styles.navitem}>
                         <a href="/" onClick={handleNavigation('/')}>Home</a>
                     </li>
+                    <li className={styles.navitem}>
+                        <a href="/settings" onClick={handleNavigation('/settings')}>Settings</a>
+                    </li>
                     {menu_items.map(({ label, subItems }) => (
                         <li key={label} className={styles.navitem}>
                             <button

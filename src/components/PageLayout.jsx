@@ -4,9 +4,10 @@ import { Routes, Route, useLocation } from 'react-router';
 
 // Pages
 import Splash from '../pages/Splash';
-import BasicSTMsLocal from '../pages/local/BasicSTMsLocal';
+import BasicSTEnLocal from '../pages/local/BasicSTEnLocal';
 import BasicOpenAI from '../pages/playground/BasicOpenAI';
 import BasicSTEnOnline from '../pages/online/BasicSTEnOnline';
+import Settings from '../pages/settings/Settings';
 
 //https://github.com/Hank-D-Tank/react-page-transitions/blob/main/src/components/Navigation.jsx
 
@@ -16,14 +17,14 @@ const PAGES = {
         color: '#ff0000',
         component: Splash
     },
-    '/local/basicstmslocal': {
+    '/local/basicstenlocal': {
         color: '#0066ff',
-        component: BasicSTMsLocal
+        component: BasicSTEnLocal
     },
-    // '/local/basicstenlocal': {
-    //     color: '#0066ff',
-    //     component: BasicSTEnLocal
-    // },
+    '/settings': {
+        color: '#0066ff',
+        component: Settings
+    },
     // '/online/basicstmsonline': {
     //     color: '#0066ff',
     //     component: BasicSTMsOnline
