@@ -3,7 +3,7 @@ export const menu_items = [
     label: 'Local',
     subItems: [
       // { name: 'Story Teller MS', path: '/local/basicstmslocal' },
-      { name: 'LMStudio Story Teller', path: '/local/basicstenlocal' },
+      { name: 'LMStudio Story Teller Basic', path: '/local/basicstenlocal' },
       // { name: 'Option 3', path: '/local/option3' },
     ],
   },
@@ -11,7 +11,7 @@ export const menu_items = [
     label: 'Online',
     subItems: [
       // { name: 'Story Teller MS', path: '/online/basicstmsonline' },
-      { name: 'OpenAI Story Teller', path: '/online/basicstenonline' },
+      { name: 'OpenAI Story Teller Basic', path: '/online/basicstenonline' },
       // { name: 'Tutorial', path: '/online/tutorial' },
     ],
   },

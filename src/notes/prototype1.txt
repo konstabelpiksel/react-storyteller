@@ -1,0 +1,94 @@
+Awesome. Let's pick one high-impact feature to prototype first. Here's a suggestion based on your current app flow — you're already asking users for characters, setting, key action, style, and length.
+
+Let’s enhance this with a **Scene-by-Scene Builder with a Story DNA Engine** — something exciting but still compatible with your current structure.
+
+---
+
+## ✨ Feature Prototype: **Scene-by-Scene Builder with Story DNA**
+
+### 💡 Core Idea:
+
+Instead of generating a full story at once, let the user guide the flow scene by scene — while the backend tracks plot structure and character arcs. Users can nudge the tone, pacing, or introduce twists as they go.
+
+---
+
+### 🔧 UI Flow Overview
+
+**Step 1: Story Setup (same as current)**
+
+* Main Character
+* Secondary Character
+* Location
+* Key Action
+* Style
+* Length (Short / Medium / Long)
+
+**+ Add this:**
+
+* **Story Mood**: (Hopeful, Dark, Funny, Melancholic, Whimsical)
+* **Conflict Type**: (vs Self, vs Others, vs Society, vs Nature)
+* **Theme**: (Betrayal, Forgiveness, Growth, Survival)
+
+---
+
+**Step 2: Story Flow Preview (Optional outline)**
+
+> "Based on your input, your story might look like this:"
+>
+> 1. Introduction: Meet the characters, normal world
+> 2. Inciting Incident: A problem arises
+> 3. Rising Action: Things get complicated
+> 4. Climax: A major turning point
+> 5. Resolution: Conflict resolved, ending tone
+
+Let user **click any part** to start from there, or go linear.
+
+---
+
+**Step 3: Interactive Scene Generation**
+
+On each screen:
+
+📝 **\[Generated Scene Text]**
+
+🔁 Regenerate | ✍️ Edit | 💬 Add Dialogue | ➕ Add Twist
+
+✅ Continue to Next Scene
+
+**Below it, add suggestions** like:
+
+* 💡 “What if a hidden enemy is revealed?”
+* 💡 “Let the main character make a mistake here”
+* 💡 “Introduce a moral dilemma”
+
+---
+
+**Step 4: Story Summary & Export**
+
+* Read as full story
+* Download as `.txt` or `.pdf`
+* Optionally save scene cards with beat notes
+* Generate cover art from prompt (Stable Diffusion if integrated)
+
+---
+
+### 🔌 Prompt Structuring (API Example)
+
+For **Scene 3: Rising Action**, the prompt to OpenAI might be:
+
+```js
+[
+  { role: "system", content: "You are a creative story assistant. Write in [style] style." },
+  { role: "user", content: `Continue the story. 
+Characters: ${mainChar}, ${secChar}. 
+Setting: ${setting}. 
+Current plot summary: ${summarySoFar}. 
+Current scene: Rising Action.
+Tone: ${mood}. Theme: ${theme}. Conflict: ${conflictType}. 
+Add tension. Do not resolve the conflict yet.` }
+]
+```
+
+---
+
+Would you like a **React component UI mockup** for this scene-by-scene builder? Or maybe a working **prompt system with state handling** for the scene generation logic in your wrapper?
